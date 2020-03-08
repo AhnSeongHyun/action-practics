@@ -1,4 +1,4 @@
-name: CD
+name: action-docker-build-using-release-tag-when-masger-merged
 
 on:
   push:
@@ -24,4 +24,4 @@ jobs:
           VERSION: ${{ steps.get_version.outputs.VERSION }}
       - name: build master branch
         run: |
-          docker build -t ash84/action-practics:${{ env.VERSION }} .
+          docker build -t ash84/action-practics:$VERSION .
