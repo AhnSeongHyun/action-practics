@@ -1,0 +1,17 @@
+name: action-docker-build-using-commit-tag-when-develop-merged
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: develop
+      - name: build develop branch
+        run: |
+          docker build -t ash84/action-practics:${{ github.sha }} .

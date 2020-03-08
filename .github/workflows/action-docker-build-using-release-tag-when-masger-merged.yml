@@ -1,0 +1,26 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - 1.*.*
+      - 2.*.*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Get the version from Tag
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        shell: bash
+      - name: Set Env
+        run: echo ${{ steps.get_version.outputs.VERSION }}
+        env:
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
+      - name: build master branch
+        run: |
+          docker build -t ash84/action-practics:${{ env.VERSION }} .
