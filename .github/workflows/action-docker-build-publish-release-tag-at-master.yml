@@ -1,4 +1,4 @@
-name: action-docker-build-using-release-tag-when-masger-merged
+name: action-docker-build-publish-release-tag-at-master
 
 on:
   push:
